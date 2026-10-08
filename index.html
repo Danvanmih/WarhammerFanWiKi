@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#070707" />
+  <title>Imperium Archive — интерактивная энциклопедия Warhammer 40,000</title>
+  <meta name="description" content="Неофициальный фанатский архив Warhammer 40,000: карта галактики, персонажи, примархи, легионы, фракции, миры, события, организации, техника и AI-помощник." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Roboto+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas><div class="noise" aria-hidden="true"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <a class="side-brand" href="#home" data-route="home"><span class="eagle">✠</span><b>IMPERIUM<br>ARCHIVE</b><small>KNOWLEDGE ENDURES</small></a>
+    <nav class="side-nav">
+      <button data-route="home">⌂ <span>Главная</span></button>
+      <button data-route="map">✥ <span>Карта галактики</span></button>
+      <button data-route="factions">⚔ <span>Фракции</span></button>
+      <button data-route="characters">☠ <span>Персонажи</span></button>
+      <button data-route="legions">♜ <span>Легионы</span></button>
+      <button data-route="chapters">✙ <span>Ордена Астартес</span></button>
+      <button data-route="worlds">◉ <span>Миры и регионы</span></button>
+      <button data-route="organizations">⌘ <span>Организации</span></button>
+      <button data-route="arsenal">⚙ <span>Техника и оружие</span></button>
+      <button data-route="timeline">⌛ <span>Хронология</span></button>
+    </nav>
+    <div class="side-divider"><span>АРХИВНЫЕ ССЫЛКИ</span></div>
+    <div class="side-links">
+      <a href="https://www.warhammer.com/" target="_blank" rel="noreferrer">Warhammer / Games Workshop ↗</a>
+      <a href="https://www.warhammer-community.com/" target="_blank" rel="noreferrer">Warhammer Community ↗</a>
+      <a href="https://www.blacklibrary.com/" target="_blank" rel="noreferrer">Black Library ↗</a>
+      <a href="https://wh40k.lexicanum.com/" target="_blank" rel="noreferrer">Lexicanum ↗</a>
+      <a href="https://warhammer40k.fandom.com/" target="_blank" rel="noreferrer">40K Wiki / Fandom ↗</a>
+      <a href="https://warhammer40k.fandom.com/ru/wiki/Warhammer_40000_Wiki" target="_blank" rel="noreferrer">Warhammer 40000 Wiki (RU) ↗</a>
+      <a href="https://jambonium.co.uk/40kmap/" target="_blank" rel="noreferrer">Jambonium 40K Map ↗</a>
+    </div>
+    <p class="side-disclaimer">Неофициальный фанатский проект. Warhammer 40,000 и связанные знаки принадлежат Games Workshop.</p>
+  </aside>
+
+  <div class="shell">
+    <header class="topbar">
+      <button class="mobile-menu" id="mobileMenu">☰</button>
+      <div class="crumb"><span>+++ IMPERIAL DATA-NET +++</span><b id="currentSection">ГЛАВНАЯ</b></div>
+      <div class="top-actions"><button class="search-btn" id="globalSearchBtn">⌕ <span>Поиск</span><kbd>Ctrl K</kbd></button><button class="assistant-pill" id="openAssistant">☠ <span>ASTARTES-AI</span></button></div>
+    </header>
+
+    <main>
+      <section id="home" class="page active-page">
+        <div class="hero">
+          <div class="hero-grid"></div><div class="hero-rift"></div>
+          <div class="hero-copy">
+            <p class="eyebrow">+++ ACCESS LEVEL: INQUISITORIAL / M42 +++</p>
+            <h1>IMPERIUM<br><span>ARCHIVE</span></h1>
+            <p class="lead">Современная фанатская энциклопедия Warhammer 40,000: персонажи, примархи, легионы, ордена Астартес, фракции, организации, оружие, миры и войны — со связанными статьями и интерактивной картой.</p>
+            <div class="hero-actions"><button class="primary" data-route="map">Исследовать галактику →</button><button class="ghost" id="heroAsk">Спросить Astartes-AI</button></div>
+          </div>
+          <div class="hero-seal"><div>✠</div><strong>THE EMPEROR<br>PROTECTS</strong><span>THOUGHT FOR THE DAY</span></div>
+        </div>
+
+        <section class="stats-ribbon" id="statsRibbon"></section>
+        <section class="content-section compact">
+          <div class="section-heading"><div><p class="eyebrow">ARCHIVE INDEX</p><h2>База данных 41-го тысячелетия</h2></div><button class="text-btn" id="randomRecord">Случайная запись ↗</button></div>
+          <div class="module-grid" id="moduleGrid"></div>
+        </section>
+        <section class="content-section compact">
+          <div class="section-heading"><div><p class="eyebrow">CURATED DOSSIERS</p><h2>Ключевые записи</h2></div></div>
+          <div class="spotlight-grid" id="homeSpotlight"></div>
+        </section>
+        <section class="content-section compact split-home">
+          <div><div class="section-heading"><div><p class="eyebrow">LATEST ERA</p><h2>Эра Индомитус</h2></div></div><div class="era-panel"><p>Галактика расколота Великим Разломом, Империум разделён, примархи возвращаются, а старые угрозы получают новые формы. Архив связывает современные кампании с событиями М30–М41.</p><button class="primary small" data-route="timeline">Открыть хронологию →</button></div></div>
+          <div><div class="section-heading"><div><p class="eyebrow">COGITATOR</p><h2>Помощник по лору</h2></div></div><div class="era-panel"><p>Astartes-AI временно работает как локальный архивный когитатор: умеет находить записи, открывать разделы и выдавать краткие справки из встроенной базы — полностью без API.</p><button class="ghost small" id="homeAsk2">Запустить когитатор →</button></div></div>
+        </section>
+      </section>
+
+      <section id="map" class="page"><section class="content-section map-section">
+        <div class="section-heading"><div><p class="eyebrow">DEPARTMENTO ASTROGRAPHICA</p><h2>Карта галактики</h2><p class="sublead">102 мира, региона и аномалии — плюс расширяемая база картографических записей. Карта схематическая: 40K использует относительные позиции, а не единый набор астрономических координат.</p></div></div>
+        <div class="map-reference glass reveal">
+          <div><span class="map-reference-mark">✥</span><div><b>КАРТОГРАФИЧЕСКИЙ РЕФЕРЕНС</b><p>Расположение и идеи слоёв сверяются с Jambonium Warhammer 40K Interactive Map. Автор оригинального проекта — Michelle Janion. Наша карта — самостоятельная визуальная адаптация, а не копия данных или интерфейса.</p></div></div>
+          <div class="map-reference-actions"><a href="https://jambonium.co.uk/40kmap/" target="_blank" rel="noreferrer">Открыть оригинальную карту ↗</a><details class="reference-preview"><summary>Референс ↘</summary><div><img src="https://jambonium.co.uk/wp-content/uploads/2022/01/40kmap-v6-1024x494.png" alt="Архивный скриншот Jambonium 40K Map" loading="lazy"><small>Архивный скриншот интерфейса Jambonium 40K Map (2022). Изображение загружается с сайта источника.</small></div></details></div>
+        </div>
+        <div class="map-modebar glass reveal">
+          <div class="era-switch"><button class="active" data-map-era="40k"><small>ERA</small><b>40K / M42</b></button><button data-map-era="30k"><small>ERA</small><b>30K / HERESY</b></button></div>
+          <div class="layer-switches"><label><input type="checkbox" data-incursion="tyranids" checked> Тираниды</label><label><input type="checkbox" data-incursion="orks" checked> Орки</label><label><input type="checkbox" data-incursion="necrons" checked> Некроны</label><label><input type="checkbox" data-incursion="tau" checked> Т’ау</label><label><input type="checkbox" id="toggleRoutes"> Маршруты</label></div>
+        </div>
+        <div class="map-toolbar glass">
+          <div class="map-search-wrap"><span>⌕</span><input id="mapSearch" placeholder="Терра, Кадия, Макрагг, Солемнейс..." /></div>
+          <select id="mapFactionFilter"><option value="all">Все стороны</option><option value="imperium">Империум</option><option value="chaos">Хаос</option><option value="aeldari">Аэльдари</option><option value="drukhari">Друкхари</option><option value="orks">Орки</option><option value="necrons">Некроны</option><option value="tyranids">Тираниды</option><option value="tau">Т’ау</option><option value="contested">Спорные зоны</option></select>
+          <select id="mapTypeFilter"><option value="all">Все типы</option><option value="world">Миры</option><option value="forge">Миры-кузницы</option><option value="hive">Миры-ульи</option><option value="craftworld">Миры-корабли</option><option value="region">Регионы</option><option value="anomaly">Аномалии</option><option value="destroyed">Уничтоженные</option></select>
+          <label class="toggle"><input id="toggleRift" type="checkbox" checked><span></span>Разлом</label><label class="toggle"><input id="toggleTerritories" type="checkbox" checked><span></span>Зоны</label><label class="toggle"><input id="toggleLabels" type="checkbox" checked><span></span>Подписи</label>
+        </div>
+        <div class="map-layout">
+          <div class="galaxy-shell">
+            <div class="map-controls"><button id="zoomIn">+</button><button id="zoomOut">−</button><button id="zoomReset">⌂</button></div>
+            <div class="galaxy-viewport" id="galaxyViewport"><div class="galaxy-stage" id="galaxyStage"><div class="galaxy-disc"></div><div class="map-rings"></div><div class="segmentum s-solar">SEGMENTUM SOLAR</div><div class="segmentum s-obscurus">OBSCURUS</div><div class="segmentum s-ultima">ULTIMA</div><div class="segmentum s-tempestus">TEMPESTUS</div><div class="segmentum s-pacificus">PACIFICUS</div><div class="territory t-ultramar" data-territory></div><div class="territory t-tau" data-territory></div><div class="territory t-eye" data-territory></div><div class="territory t-ork" data-territory></div><div class="territory t-necron" data-territory></div><div class="great-rift" id="greatRift"></div><div class="incursion inc-tyranids" data-incursion-area="tyranids"></div><div class="incursion inc-orks" data-incursion-area="orks"></div><div class="incursion inc-necrons" data-incursion-area="necrons"></div><div class="incursion inc-tau" data-incursion-area="tau"></div><svg class="route-layer" id="routeLayer" viewBox="0 0 1200 780" aria-hidden="true"><path class="route loyal" d="M600 430 C710 320 820 270 940 310"/><path class="route traitor" d="M390 285 C470 360 520 410 600 430"/><path class="route traitor" d="M310 345 C390 310 470 305 540 370"/><path class="route loyal" d="M865 420 C790 485 710 500 600 430"/></svg><div id="mapPoints"></div></div></div>
+            <div class="map-legend"><span><i class="c-imperium"></i>Империум</span><span><i class="c-chaos"></i>Хаос</span><span><i class="c-xenos"></i>Ксеносы</span><span><i class="c-contested"></i>Спорная зона</span></div>
+            <div class="map-hud"><div id="mapCoords">X 000 · Y 000</div><div class="map-scale">ASTROGRAPHICA // RELATIVE COORDINATES</div></div><div class="map-scan" aria-hidden="true"></div>
+          </div>
+          <aside class="map-side glass" id="mapSide"><p class="eyebrow">SELECTED RECORD</p><h3>Выбери объект</h3><p>Колесо мыши — масштаб. Перетаскивание — перемещение. Фильтры позволяют смотреть карту по контролю и типу объекта.</p></aside>
+        </div>
+      </section></section>
+
+      <section id="factions" class="page"><section class="content-section"><div class="section-heading"><div><p class="eyebrow">BELLIGERENTS</p><h2>Фракции</h2><p class="sublead">24 крупные силы: Империум, Хаос, ксеносы и специализированные армии.</p></div><input class="search" id="factionSearch" placeholder="Поиск фракции..." /></div><div class="category-tabs" id="factionTabs"><button class="chip active" data-fgroup="all">Все</button><button class="chip" data-fgroup="Imperium">Империум</button><button class="chip" data-fgroup="Chaos">Хаос</button><button class="chip" data-fgroup="Xenos">Ксеносы</button></div><div class="card-grid" id="factionGrid"></div></section></section>
+      <section id="legions" class="page"><section class="content-section"><div class="section-heading"><div><p class="eyebrow">LEGIONES ASTARTES</p><h2>Легионы Астартес</h2><p class="sublead">18 известных легионов Великого крестового похода, их примархи, родные миры и судьба.</p></div></div><div class="category-tabs"><button class="chip active" data-loyalty="all">Все</button><button class="chip" data-loyalty="loyalist">Лоялисты</button><button class="chip" data-loyalty="traitor">Предатели</button></div><div class="legion-grid" id="legionGrid"></div><div class="redacted-record"><span>II</span><div><b>[ЗАПИСЬ УДАЛЕНА]</b><small>EXPUNGED FROM IMPERIAL RECORDS</small></div><span>XI</span></div></section></section>
+      <section id="chapters" class="page"><section class="content-section chapters-section">
+        <div class="section-heading"><div><p class="eyebrow">ADEPTUS ASTARTES / CHAPTERS</p><h2>Ордена Космодесанта</h2><p class="sublead">От орденов Первого Основания до наследников, Примарис и загадочных генолиний. Фильтруй по легиону-прародителю, Основанию и ищи связи с героями, мирами и войнами.</p></div><input class="search" id="chapterSearch" placeholder="Black Templars, Кровавые Вороны..." /></div>
+        <div class="gene-lineage" id="geneLineage"></div>
+        <div class="chapter-toolbar glass"><select id="chapterLegionFilter"><option value="all">Все генолинии</option></select><select id="chapterFoundingFilter"><option value="all">Все Основания</option></select><span id="chapterCount"></span></div>
+        <div class="chapter-grid" id="chapterGrid"></div>
+      </section></section>
+      <section id="worlds" class="page"><section class="content-section"><div class="section-heading"><div><p class="eyebrow">MUNDI / ASTROGRAPHICA</p><h2>Миры и регионы</h2><p class="sublead">Миры-крепости, кузницы, ульи, планеты Астартес, миры-корабли, аномалии и стратегические зоны. Каждая запись связана с картой, событиями и фракциями.</p></div><input class="search" id="worldSearch" placeholder="Кадия, Баал, Сота, Терра..." /></div><div class="world-toolbar glass"><select id="worldAffFilter"><option value="all">Все стороны</option><option value="imperium">Империум</option><option value="chaos">Хаос</option><option value="aeldari">Аэльдари</option><option value="drukhari">Друкхари</option><option value="necrons">Некроны</option><option value="orks">Орки</option><option value="tyranids">Тираниды</option><option value="tau">Т’ау</option></select><select id="worldTypeFilter"><option value="all">Все типы</option></select><span id="worldCount"></span></div><div class="world-grid" id="worldGrid"></div></section></section>
+      <section id="characters" class="page"><section class="content-section"><div class="section-heading"><div><p class="eyebrow">PERSONAE / INDEX</p><h2>Персонажи</h2><p class="sublead">91 персонаж: примархи, командиры, ксеносы, герои, злодеи и исторические фигуры.</p></div><input class="search" id="characterSearch" placeholder="Поиск персонажа..." /></div><div class="character-grid" id="characterGrid"></div></section></section>
+      <section id="organizations" class="page"><section class="content-section"><div class="section-heading"><div><p class="eyebrow">ORDINES / INSTITUTIONS</p><h2>Организации</h2><p class="sublead">Инквизиторские ордосы, ордены, династии, культы, военные структуры и политические институты.</p></div><input class="search" id="organizationSearch" placeholder="Поиск организации..." /></div><div class="card-grid" id="organizationGrid"></div></section></section>
+      <section id="arsenal" class="page"><section class="content-section"><div class="section-heading"><div><p class="eyebrow">ARSENAL / MACHINA</p><h2>Техника и оружие</h2><p class="sublead">62 записи: оружие, реликвии, броня, танки, дредноуты, титаны, корабли и ксенотехнологии.</p></div><input class="search" id="arsenalSearch" placeholder="Болтер, Warlord, Crisis..." /></div><div class="category-tabs" id="arsenalTabs"></div><div class="card-grid" id="arsenalGrid"></div></section></section>
+      <section id="timeline" class="page"><section class="content-section narrow"><div class="section-heading"><div><p class="eyebrow">CHRONOLOGICA</p><h2>Хронология</h2><p class="sublead">53 ключевых события от Войн Объединения и Истваана до Arks of Omen и Четвёртой Тиранидской войны.</p></div></div><div class="timeline" id="timelineList"></div></section></section>
+      <section id="detail" class="page"><div class="detail-page" id="detailPage"></div></section>
+    </main>
+    <footer><span>IMPERIUM ARCHIVE · UNOFFICIAL FAN PROJECT · MAP REFERENCE: JAMBONIUM.CO.UK</span><span>В знании — оружие. В проверке источников — защита от ереси.</span></footer>
+  </div>
+
+  <div class="search-overlay" id="globalSearch"><div class="search-modal"><div class="search-head"><input id="globalSearchInput" placeholder="Поиск по персонажам, мирам, легионам, оружию..."/><button id="closeGlobalSearch">×</button></div><div id="globalSearchResults" class="global-results"></div></div></div>
+  <div class="assistant-backdrop" id="assistantBackdrop"></div>
+  <aside class="assistant-panel" id="assistantPanel"><div class="assistant-head"><div><p class="eyebrow">LOCAL COGITATOR</p><h2>ASTARTES-AI</h2></div><button id="closeAssistant">×</button></div><div class="assistant-status"><i></i> Локальный режим · без внешнего API</div><div class="chat" id="chat"><div class="msg ai"><b>ASTARTES-AI</b><p>Сейчас я работаю как архивная заглушка: ищу совпадения во встроенной базе, показываю краткие справки и открываю нужные записи или разделы. Внешний ИИ временно отключён.</p></div></div><div class="quick-asks"><button>Кто такой Робут Жиллиман?</button><button>Открой Солемнейс</button><button>Покажи легионы</button><button>Что такое Пария Нексус?</button></div><form id="askForm" class="ask-form"><textarea id="question" rows="2" placeholder="Введите вопрос или приказ..."></textarea><button type="submit">→</button></form><small class="assistant-note">Локальный режим: без отправки запросов в интернет. Полноценный ИИ можно вернуть позже.</small></aside>
+
+  <div class="media-lightbox" id="mediaLightbox" aria-hidden="true"><button class="lightbox-close" aria-label="Закрыть">×</button><figure><img alt=""><figcaption></figcaption></figure></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="/lore-data.js"></script><script src="/expanded-content.js"></script><script src="/content-plus.js"></script><script src="/chapters-data.js"></script><script src="/codex-v5.js"></script><script src="/v8-content.js"></script><script src="/v9-content.js"></script><script src="/v10-content.js"></script><script src="/v11-content.js"></script><script src="/v12-content.js"></script><script src="/app.js"></script><script src="/enhancements.js"></script><script src="/deep-upgrade.js"></script><script src="/archive-depth.js"></script><script src="/v8-upgrade.js"></script><script src="/v9-upgrade.js"></script><script src="/v10-upgrade.js"></script><script src="/v11-upgrade.js"></script><script src="/v12-upgrade.js"></script>
+</body>
+</html>
