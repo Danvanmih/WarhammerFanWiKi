@@ -1,4 +1,4 @@
-# Imperium Archive 40K — CODEX V13 / Chronologica & Theme Matrix
+# Imperium Archive 40K — V13 Home Focus Branch
 
 ## What V13 changes
 
@@ -168,3 +168,16 @@ V11 — это адаптивный и поисковый проход пове�
 - The right dossier rail collapses below the article based on available content width, not just monitor width.
 - Runtime media can be loaded from listed public sources through `/api/source-preview`, Wiki/Fandom galleries, and the media proxy.
 - Use `IA_OFFLINE=1 npm start` to disable all runtime media lookups while keeping local art and the full encyclopedia usable.
+
+
+## V13 — Home Focus
+
+Эта ветка целенаправленно дорабатывает только главную страницу до законченного состояния.
+
+- динамическая тема: Империум / Хаос / Аэльдари / Некроны / Орки / Т’ау;
+- favicon и символ бренда меняются вместе с выбранной темой;
+- иллюстрированные карточки основных разделов;
+- тематическая подборка стартовых материалов;
+- визуальный блок ключевых записей;
+- блок «С чего начать изучение 40K»;
+- явная матрица источников на главной.
