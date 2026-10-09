@@ -73,7 +73,6 @@ function install(){
  $('#v19Search').oninput=e=>{state.q=e.target.value.trim().toLowerCase();render()};$('#v19Affiliation').onchange=e=>{state.affiliation=e.target.value;refreshLineages();render()};$('#v19Role').onchange=e=>{state.role=e.target.value;render()};$('#v19Status').onchange=e=>{state.status=e.target.value;render()};$('#v19Sort').onchange=e=>{state.sort=e.target.value;render()};
  $$('[data-view]').forEach(b=>{b.classList.toggle('active',b.dataset.view===state.view);b.onclick=()=>{state.view=b.dataset.view;localStorage.setItem('ia-char-view',state.view);$$('[data-view]').forEach(x=>x.classList.toggle('active',x===b));render()}});
  $('#v19Reset').onclick=()=>{state={faction:'all',affiliation:'all',role:'all',status:'all',sort:'importance',view:state.view,q:''};$('#v19Search').value='';$('#v19Role').value='all';$('#v19Status').value='all';$('#v19Sort').value='importance';$$('[data-faction]').forEach(x=>x.classList.toggle('active',x.dataset.faction==='all'));refreshAff();render()};
- document.addEventListener('click',e=>{const s=e.target.closest('[data-v19-source]');if(s){e.preventDefault();e.stopPropagation();window.open(s.dataset.v19Source,'_blank','noopener')}})
  refreshAff();render()
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
