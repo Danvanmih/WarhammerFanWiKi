@@ -1,0 +1,78 @@
+/* V20 — curated visual hygiene */
+#moduleGrid .module-card{position:relative}
+#moduleGrid .home-card-art,
+#moduleGrid .module-art{
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  border-bottom:1px solid rgba(202,164,82,.13);
+  filter:saturate(.96) contrast(1.04);
+}
+#moduleGrid [data-route="map"] .home-card-art,
+#moduleGrid [data-route="map"] .module-art{background-position:center 50%!important}
+#moduleGrid [data-route="characters"] .home-card-art,
+#moduleGrid [data-route="characters"] .module-art{background-position:center 28%!important}
+#moduleGrid [data-route="factions"] .home-card-art,
+#moduleGrid [data-route="factions"] .module-art{background-position:center 42%!important}
+#moduleGrid [data-route="legions"] .home-card-art,
+#moduleGrid [data-route="legions"] .module-art{background-position:center 24%!important}
+#moduleGrid [data-route="chapters"] .home-card-art,
+#moduleGrid [data-route="chapters"] .module-art{background-position:center 28%!important}
+#moduleGrid [data-route="worlds"] .home-card-art,
+#moduleGrid [data-route="worlds"] .module-art{background-position:center 43%!important}
+#moduleGrid [data-route="organizations"] .home-card-art,
+#moduleGrid [data-route="organizations"] .module-art{background-position:center 48%!important}
+#moduleGrid [data-route="arsenal"] .home-card-art,
+#moduleGrid [data-route="arsenal"] .module-art{background-position:center 34%!important}
+#moduleGrid [data-route="timeline"] .home-card-art,
+#moduleGrid [data-route="timeline"] .module-art{background-position:center 45%!important}
+
+.v20-source-link{
+  position:absolute;z-index:8;left:14px;bottom:10px;
+  max-width:calc(100% - 28px);padding:5px 7px;
+  border:1px solid rgba(202,164,82,.27);border-radius:7px;
+  background:rgba(6,8,9,.82);backdrop-filter:blur(7px);
+  color:#b99a5f;text-decoration:none;
+  font:700 6px 'Roboto Condensed',sans-serif;
+  letter-spacing:.08em;text-transform:uppercase;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.v20-source-link:hover{border-color:rgba(219,183,105,.55);color:#e5c987;background:rgba(13,14,14,.94)}
+#moduleGrid .module-card>span:first-of-type{position:relative;z-index:2}
+#moduleGrid .module-card.home-visual,
+#moduleGrid .module-card.illustrated-home{overflow:hidden}
+#moduleGrid .module-card.home-visual:before,
+#moduleGrid .module-card.illustrated-home:before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.018),inset 0 18px 34px rgba(255,255,255,.012);
+}
+#home .home-remote-credit{display:none!important}
+#homeFocusGrid .home-focus-art,
+#homeVisualGrid .art,
+#themeShowcaseGrid .art,
+#homeGalleryGrid .art,
+#homeSpotlight .home-card-art,
+#homeSpotlight .spot-art{
+  background-size:cover!important;background-repeat:no-repeat!important;background-position:center 35%!important;
+  filter:saturate(.95) contrast(1.04)
+}
+#homeFocusGrid [data-id="guilliman"] .home-focus-art,
+#homeVisualGrid [data-id="guilliman"] .art,
+#themeShowcaseGrid [data-id="guilliman"] .art,
+#homeGalleryGrid [data-id="guilliman"] .art{background-position:center 28%!important}
+#homeFocusGrid [data-id="trazyn"] .home-focus-art,
+#homeVisualGrid [data-id="trazyn"] .art{background-position:center 24%!important}
+#homeFocusGrid [data-id="farsight"] .home-focus-art,
+#homeVisualGrid [data-id="farsight"] .art{background-position:center 32%!important}
+#homeFocusGrid [data-id="ghazghkull"] .home-focus-art,
+#homeVisualGrid [data-id="ghazghkull"] .art{background-position:center 40%!important}
+
+/* Make the art read as illustration, never as a UI screenshot. */
+#moduleGrid .home-card-art:after,
+#moduleGrid .module-art:after,
+#homeFocusGrid .home-focus-art:after,
+#homeVisualGrid .art:after,
+#themeShowcaseGrid .art:after,
+#homeGalleryGrid .art:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(4,5,6,.02),rgba(4,5,6,.08) 55%,rgba(6,7,8,.58) 100%);
+}
