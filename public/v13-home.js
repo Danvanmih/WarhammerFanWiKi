@@ -1,30 +1,30 @@
 (function(){
   const body=document.body, root=document.documentElement;
   const themes={
-    imperium:{label:'Империум',glyph:'✠',gold:'#d5b673',gold2:'#8e6c2c',red:'#9f2d25',red2:'#5c1713',themeColor:'#0b0b0c',hero:"url('/assets/imperium-city.jpg')"},
-    chaos:{label:'Хаос',glyph:'✹',gold:'#c79b63',gold2:'#7b4c2d',red:'#b13a2f',red2:'#54110f',themeColor:'#0f0909',hero:"url('/assets/chaos-rift.jpg')"},
+    imperium:{label:'Империум',glyph:'✠',gold:'#d5b673',gold2:'#8e6c2c',red:'#9f2d25',red2:'#5c1713',themeColor:'#0b0b0c',hero:"url('/assets/terra-panorama.webp')"},
+    chaos:{label:'Хаос',glyph:'✹',gold:'#c79b63',gold2:'#7b4c2d',red:'#b13a2f',red2:'#54110f',themeColor:'#0f0909',hero:"url('/assets/great-rift-panorama.webp')"},
     aeldari:{label:'Аэльдари',glyph:'◈',gold:'#9ec8c7',gold2:'#3d7d80',red:'#7e2a49',red2:'#3d1630',themeColor:'#071011',hero:"url('/assets/aeldari-craftworld.webp')"},
     necrons:{label:'Некроны',glyph:'⟡',gold:'#7ee1c2',gold2:'#27886e',red:'#356153',red2:'#17352d',themeColor:'#06100e',hero:"url('/assets/trazyn-hero.webp')"},
     orks:{label:'Орки',glyph:'☣',gold:'#b1c868',gold2:'#617b2a',red:'#8f2f23',red2:'#47160f',themeColor:'#0b0f08',hero:"url('/assets/orks-war.webp')"},
     tau:{label:'Т’ау',glyph:'◌',gold:'#8fd0de',gold2:'#2c89c7',red:'#275773',red2:'#143248',themeColor:'#091016',hero:"url('/assets/tau-empire.webp')"}
   };
   const routeArt={
-    map:'/assets/galaxy-atlas.webp',characters:'/assets/guilliman-hero.jpg',factions:'/assets/factions.jpg',
-    legions:'/assets/primarchs.jpg',chapters:'/assets/ultramarines-parade.webp',worlds:'/assets/terra-panorama.webp',
-    organizations:'/assets/mechanicus-forge.webp',arsenal:'/assets/imperial-fists-siege.webp',timeline:'/assets/great-rift-panorama.webp'
+    map:'/assets/galaxy-atlas.webp',characters:'/assets/lion-hero.webp',factions:'/assets/tyranid-invasion.webp',
+    legions:'/assets/horus-hero.webp',chapters:'/assets/ultramarines-parade.webp',worlds:'/assets/terra-panorama.webp',
+    organizations:'/assets/mechanicus-forge.webp',arsenal:'/assets/tau-empire.webp',timeline:'/assets/great-rift-panorama.webp'
   };
   const focus={
     imperium:[
-      ['character','guilliman','PRIMARCH','Робут Жиллиман','Возвращение примарха стало одним из главных символов современной эры.','/assets/guilliman-hero.jpg'],
+      ['character','guilliman','PRIMARCH','Робут Жиллиман','Возвращение примарха стало одним из главных символов современной эры.','/assets/ultramarines-parade.webp'],
       ['location','terra','THRONEWORLD','Священная Терра','Политическое, религиозное и символическое сердце человечества.','/assets/terra-panorama.webp'],
       ['chapter','ultramarines-chapter','ADEPTUS ASTARTES','Ультрамарины','Удобная точка входа в организацию, культуру и доктрину Космодесанта.','/assets/ultramarines-parade.webp'],
-      ['event','indomitus','ERA INDOMITUS','Крестовый поход Индомитус','Кампания, которая связала падение Кадии, возвращение Жиллимана и новый порядок M42.','/assets/imperium-city.jpg']
+      ['event','indomitus','ERA INDOMITUS','Крестовый поход Индомитус','Кампания, которая связала падение Кадии, возвращение Жиллимана и новый порядок M42.','/assets/great-rift-panorama.webp']
     ],
     chaos:[
       ['character','abaddon','WARMASTER','Абаддон Разоритель','Ключевая фигура Долгой войны и современной эпохи Хаоса.','/assets/horus-hero.webp'],
       ['location','eye-of-terror','WARP STORM','Око Ужаса','Разлом между реальностью и Варпом, определивший стратегию Чёрных крестовых походов.','/assets/great-rift-panorama.webp'],
-      ['organization','black-legion','TRAITOR HOST','Чёрный Легион','Главная наследница сил Хоруса и политический центр войны предателей.','/assets/chaos-rift.jpg'],
-      ['event','fall-of-cadia','BLACK CRUSADE','Падение Кадии','Событие, открывшее Великую Трещину и изменившее всю стратегическую карту галактики.','/assets/chaos-rift.jpg']
+      ['organization','black-legion','TRAITOR HOST','Чёрный Легион','Главная наследница сил Хоруса и политический центр войны предателей.','/assets/great-rift-panorama.webp'],
+      ['event','fall-of-cadia','BLACK CRUSADE','Падение Кадии','Событие, открывшее Великую Трещину и изменившее всю стратегическую карту галактики.','/assets/great-rift-panorama.webp']
     ],
     aeldari:[
       ['character','eldrad','FARSEER','Эльдрад Ультран','Один из самых влиятельных провидцев современной истории аэльдари.','/assets/aeldari-craftworld.webp'],
@@ -52,12 +52,12 @@
     ]
   };
   const visual=[
-    ['character','guilliman','Робут Жиллиман','Возвращение примарха как символ эпохи Индомитус.','/assets/guilliman-hero.jpg'],
+    ['character','guilliman','Робут Жиллиман','Возвращение примарха как символ эпохи Индомитус.','/assets/ultramarines-parade.webp'],
     ['character','lion','Лев Эль’Джонсон','Вторая крупная линия возвращения примархов в M42.','/assets/lion-hero.webp'],
     ['location','terra','Священная Терра','Центр власти, религии и памяти Империума.','/assets/terra-panorama.webp'],
     ['location','pariah-nexus','Пария Нексус','Некронская зона, в которой сама природа Варпа оказывается под давлением.','/assets/trazyn-hero.webp'],
     ['event','horus-heresy','Ересь Хоруса','Историческая ось, без которой невозможно понять современный 40K.','/assets/great-rift-panorama.webp'],
-    ['organization','black-legion','Чёрный Легион','Наследники предательства и главный двигатель Долгой войны.','/assets/chaos-rift.jpg']
+    ['organization','black-legion','Чёрный Легион','Наследники предательства и главный двигатель Долгой войны.','/assets/great-rift-panorama.webp']
   ];
   const sources=[
     ['Warhammer / Games Workshop','https://www.warhammer.com/','Официальный вход в бренд: фракции, миниатюры и базовый контекст.'],
@@ -101,13 +101,13 @@
   function decorateExisting(){
     document.querySelectorAll('#moduleGrid .module-card').forEach(card=>{
       if(card.querySelector('.home-card-art'))return;
-      const art=routeArt[card.dataset.route]||'/assets/imperium-city.jpg';
+      const art=routeArt[card.dataset.route]||'/assets/terra-panorama.webp';
       card.classList.add('home-visual');
       card.insertAdjacentHTML('afterbegin','<div class="home-card-art" style="background-image:linear-gradient(180deg,rgba(6,7,8,.06),rgba(6,7,8,.92)),url(\''+art+'\')"></div>');
     });
     document.querySelectorAll('#homeSpotlight .spot-card').forEach(card=>{
       if(card.querySelector('.home-card-art'))return;
-      let art='/assets/imperium-city.jpg';
+      let art='/assets/terra-panorama.webp';
       try{const rec=typeof getRecord==='function'?getRecord(card.dataset.detail,card.dataset.id):null;if(rec&&typeof assetFor==='function')art=assetFor(card.dataset.detail,rec)}catch(e){}
       card.classList.add('home-visual');
       card.insertAdjacentHTML('afterbegin','<div class="home-card-art" style="background-image:linear-gradient(180deg,rgba(6,7,8,.06),rgba(6,7,8,.92)),url(\''+art+'\')"></div>');
