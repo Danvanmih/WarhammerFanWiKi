@@ -173,26 +173,14 @@
     credit(el.parentElement||el,page,label||data.sourceName);
   }
   async function hydrateHero(){
-    const key=document.body.dataset.homeTheme||localStorage.getItem('imperiumArchiveHomeTheme')||'imperium';
-    const cfg=THEME_IMAGE_SOURCES[key]||THEME_IMAGE_SOURCES.imperium;
-    const data=await preview(cfg.page);if(!data?.src)return;
-    document.documentElement.style.setProperty('--home-hero-art',"url('"+proxy(data.src)+"')");
-    let a=q('.hero .home-hero-credit');
-    if(!a){
-      a=document.createElement('a');a.className='home-hero-credit';a.target='_blank';a.rel='noreferrer';
-      q('#home .hero')?.appendChild(a);
-    }
-    if(a){a.href=cfg.page;a.textContent=cfg.label+' · изображение ↗'}
+    // V20: home hero art is curated locally. Generic topic previews can change over time
+    // and previously produced unrelated Tyranid/rules artwork on other categories.
+    return;
   }
   function hydrateHomeArt(){
-    qa('#moduleGrid .module-card').forEach(card=>{
-      const art=q('.home-card-art',card),page=ROUTE_IMAGE_SOURCES[card.dataset.route];hydrateBg(art,page,'Warhammer Community');
-    });
-    qa('#homeSpotlight .spot-card,#homeFocusGrid [data-detail],#homeVisualGrid [data-detail]').forEach(card=>{
-      const key=(card.dataset.detail||'')+':'+(card.dataset.id||'');
-      const page=ENTITY_IMAGE_SOURCES[key];if(!page)return;
-      const art=q('.home-card-art,.home-focus-art,.art',card);hydrateBg(art,page,'Warhammer Community');
-    });
+    // V20: module/focus/gallery artwork is curated by v13-home + v20 media sanitizer.
+    // Do not replace it with mutable topic-page OG images.
+    return;
   }
   function youtubeThumb(url){
     try{
