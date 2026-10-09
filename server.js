@@ -96,12 +96,40 @@ async function proxyImage(url){
   }catch{return null}
 }
 
+async function youtubeOEmbed(rawUrl){
+  try{
+    const u=new URL(rawUrl);
+    const host=u.hostname.toLowerCase().replace(/^www\./,'');
+    if(!['youtube.com','m.youtube.com','youtu.be'].includes(host))return null;
+    const endpoint='https://www.youtube.com/oembed?format=json&url='+encodeURIComponent(u.toString());
+    const r=await fetch(endpoint,netOpts({'user-agent':'ImperiumArchiveFanProject/13.0','accept':'application/json'},7000));
+    if(!r.ok)return null;
+    const j=await r.json();
+    return{
+      title:String(j.title||'').slice(0,300),
+      authorName:String(j.author_name||'').slice(0,160),
+      authorUrl:String(j.author_url||'').slice(0,1000),
+      thumbnailUrl:String(j.thumbnail_url||'').slice(0,2000),
+      width:Number(j.width||0)||null,
+      height:Number(j.height||0)||null,
+      source:u.toString()
+    };
+  }catch{return null}
+}
+
 function send(res,status,body,type='text/plain; charset=utf-8',headers={}){res.writeHead(status,{'content-type':type,...headers});res.end(body)}
 createServer(async(req,res)=>{
   try{
     const url=new URL(req.url,'http://localhost');
 
     if(offlineMedia && url.pathname.startsWith('/api/'))return send(res,503,JSON.stringify({error:'runtime media disabled'}),'application/json');
+    if(url.pathname==='/api/youtube-oembed'){
+      const target=String(url.searchParams.get('url')||'').slice(0,3000);
+      if(!target)return send(res,400,JSON.stringify({error:'url required'}),'application/json');
+      const result=await youtubeOEmbed(target);
+      if(!result)return send(res,404,JSON.stringify({error:'youtube metadata unavailable'}),'application/json');
+      return send(res,200,JSON.stringify(result),'application/json',{'cache-control':'public, max-age=21600'});
+    }
     if(url.pathname==='/api/source-preview'){
       const target=String(url.searchParams.get('url')||'').slice(0,5000);if(!target)return send(res,400,JSON.stringify({error:'url required'}),'application/json');
       const result=await sourcePreview(target);if(!result)return send(res,404,JSON.stringify({error:'preview unavailable'}),'application/json');
