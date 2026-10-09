@@ -151,3 +151,18 @@
 @media(max-width:900px){.v17-route-list{grid-template-columns:repeat(3,minmax(0,1fr))}.v17-map-lore-strip{grid-template-columns:1fr}.map-point span{font-size:9px}}
 @media(max-width:620px){.v17-route-list{grid-template-columns:repeat(2,minmax(0,1fr))}.v17-route-head{display:block}.v17-route-clear{margin-top:8px}.map-point span{max-width:120px;overflow:hidden;text-overflow:ellipsis}}
 @media(prefers-reduced-motion:reduce){.v17-primarch-route{animation:none}.map-point.critical i:after{animation:none}}
+
+
+/* V17.1 — stable screen-space label and marker sizing */
+.galaxy-stage{--v17-ui-scale:1}
+.map-point{
+  transform:translate(-50%,-50%) scale(var(--v17-ui-scale))!important;
+  transform-origin:center center!important;
+}
+.map-point:hover,.map-point.highlight,.map-point.v17-search-hit{
+  transform:translate(-50%,-50%) scale(calc(var(--v17-ui-scale) * 1.12))!important;
+}
+.galaxy-stage.v17-labels-off .map-point span{display:none!important}
+.galaxy-stage.v17-route-active .route-v8,
+.galaxy-stage.v17-route-active .v10-primarch-route,
+.galaxy-stage.v17-route-active .v10-primarch-node{opacity:.10!important}
