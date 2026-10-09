@@ -194,10 +194,19 @@
       const art=q('.home-card-art,.home-focus-art,.art',card);hydrateBg(art,page,'Warhammer Community');
     });
   }
+  function youtubeThumb(url){
+    try{
+      const u=new URL(url);
+      let id=u.hostname.includes('youtu.be')?u.pathname.slice(1):u.searchParams.get('v');
+      if(!id&&u.pathname.includes('/shorts/'))id=u.pathname.split('/shorts/')[1]?.split('/')[0];
+      return id?'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg':'';
+    }catch{return ''}
+  }
   function youtubeCard(item,index){
     const id='media-youtube-'+index+'-'+Math.random().toString(36).slice(2,7);
+    const thumb=youtubeThumb(item.url);
     return '<article class="media-hub-card media-youtube" id="'+id+'" data-youtube="'+item.url+'">'+
-      '<a class="media-thumb" href="'+item.url+'" target="_blank" rel="noreferrer"><div class="media-thumb-fallback">▶</div><span>'+item.badge+'</span></a>'+
+      '<a class="media-thumb" href="'+item.url+'" target="_blank" rel="noreferrer"'+(thumb?' style="background-image:linear-gradient(180deg,rgba(5,6,7,.03),rgba(5,6,7,.4)),url(\''+thumb+'\')"':'')+'><div class="media-thumb-fallback">▶</div><span>'+item.badge+'</span></a>'+
       '<div class="media-card-copy"><small class="media-author">'+item.fallbackAuthor+'</small><h3>'+item.fallbackTitle+'</h3><p>'+item.note+'</p>'+
       '<div class="media-actions"><a class="watch" href="'+item.url+'" target="_blank" rel="noreferrer">Смотреть на YouTube ↗</a>'+
       '<a class="author" href="'+item.authorUrl+'" target="_blank" rel="noreferrer">Автор / канал ↗</a>'+
